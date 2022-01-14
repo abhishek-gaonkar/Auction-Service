@@ -1,0 +1,11 @@
+# Environment Variables
+.env
+.env.test
+
+# Any Modules
+node_modules
+
+# Any Packs and temp files
+.temp
+.serverless
+.webpack
