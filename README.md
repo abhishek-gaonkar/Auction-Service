@@ -4,8 +4,8 @@ Using AWS's Lambda, DynamoDB, S3, SES, SQS, API Gateway, etc., a Server-less Arc
 
 ## Architecture
 
-Below is a simple architecture
-<img src="docs/sls_service.jpg">
+Below is a simple architecture with multiple AWS resources<br><br>
+<img src="docs/sls_service.png" width="840">
 
 ## Requirements
 
@@ -18,6 +18,6 @@ Below is a simple architecture
 
 ## Getting started
 
-`cd auction-service`
-`npm install`
-`serverless deploy --verbose`
+`cd auction-service` <br>
+`npm install` <br>
+`serverless deploy --verbose` <br>
