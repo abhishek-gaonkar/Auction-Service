@@ -21,6 +21,8 @@ export const closeAuction = async (auction) => {
   const { title, sellerEmail, highestBid } = auction;
   const { amount, bidderEmail } = highestBid;
 
+  let notifySellerEmail, notifyBidderEmail;
+
   const successSoldMessage = {
     QueueUrl: process.env.MAIL_QUEUE_URL,
     MessageBody: JSON.stringify({
@@ -44,9 +46,9 @@ export const closeAuction = async (auction) => {
   };
 
   if (amount > 0 && bidderEmail !== "") {
-    const notifySellerEmail = sqs.sendMessage(successSoldMessage).promise();
+    notifySellerEmail = sqs.sendMessage(successSoldMessage).promise();
 
-    const notifyBidderEmail = sqs
+    notifyBidderEmail = sqs
       .sendMessage({
         QueueUrl: process.env.MAIL_QUEUE_URL,
         MessageBody: JSON.stringify({
@@ -61,6 +63,7 @@ export const closeAuction = async (auction) => {
       })
       .promise();
   } else {
+    notifySellerEmail = sqs.sendMessage(failedSoldMessage).promise();
   }
 
   return Promise.all([notifySellerEmail, notifyBidderEmail]);
