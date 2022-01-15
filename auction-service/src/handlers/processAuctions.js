@@ -1,5 +1,5 @@
-import { getEndedAuctions } from "../middlewares/getEndedAuctions";
-import { closeAuction } from "../middlewares/closeAuction";
+import { getEndedAuctions } from "../lib/getEndedAuctions";
+import { closeAuction } from "../lib/closeAuction";
 import createError from "http-errors";
 
 const processAuctions = async (event, context) => {

@@ -1,6 +1,10 @@
 # Serverless Architecture based Auction Project
 
-Using AWS's Lambda, DynamoDB, S3, SES, SQS, API Gateway, etc., a Server-less Architecture Project has been written. The Auction Service works as a Microservice, not as a Monolithic Application. Since it uses the Cloud strategy of deployment, it uses Serverless framework and YAML style definition of code
+A course from Udemy by Ariel Weinberger
+
+## Project Description
+
+Using AWS's multiple services like Lambda, DynamoDB, S3, SES, SQS, API Gateway, etc., a Server-less Architecture Project has been written. The Auction Service works as a Microservice, not as a Monolithic Application. Since it uses the Cloud strategy of deployment, it uses Serverless framework and YAML style definition of code
 
 ## Architecture
 
