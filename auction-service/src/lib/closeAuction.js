@@ -28,7 +28,7 @@ export const closeAuction = async (auction) => {
     MessageBody: JSON.stringify({
       subject: `Your Auction Item was sold!`,
       recipient: sellerEmail,
-      body: `Congratulations! The item you placed: ${title} was sold for $${amount}. As per our Terms and Conditions, our Commision of $${
+      body: `Congratulations! The item you placed: "${title}" was sold for $${amount}. As per our Terms and Conditions, our Commision of $${
         amount / 20
       } will be deducted. We will credit the remaining amount of $${
         (19 * amount) / 20
@@ -41,7 +41,7 @@ export const closeAuction = async (auction) => {
     MessageBody: JSON.stringify({
       subject: `Your Auction Item was not sold!`,
       recipient: sellerEmail,
-      body: `We are Sorry! The item you placed: ${title} remained unsold. If you wish to sell it once more kindly contact us and we will contact you with further steps. Thank you for choosing us as your Auction Partner.`,
+      body: `We are Sorry! The item you placed: "${title}" remained unsold. If you wish to sell it once more kindly contact us and we will contact you with further steps. Thank you for choosing us as your Auction Partner.`,
     }),
   };
 
@@ -54,7 +54,7 @@ export const closeAuction = async (auction) => {
         MessageBody: JSON.stringify({
           subject: `Congratulations! Your bid was the highest!`,
           recipient: bidderEmail,
-          body: `Congratulations! The item you you placed the bid on: ${title} was the highest for ${amount}. As per our Terms and Conditions, along with our Commision of $${
+          body: `Congratulations! The item you you placed the bid on: "${title}" was the highest for $${amount}. As per our Terms and Conditions, along with our Commision of $${
             amount / 20
           }, a total of $${
             (21 * amount) / 20
