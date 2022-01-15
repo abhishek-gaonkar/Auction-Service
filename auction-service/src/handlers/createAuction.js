@@ -1,20 +1,24 @@
 import { v4 as uuidv4 } from "uuid";
 import AWS from "aws-sdk";
-import commonMiddleware from "../middlewares/commonMiddleware";
+import validator from "@middy/validator";
+import commonMiddleware from "../lib/commonMiddleware";
 import createError from "http-errors";
+import createAuctionSchema from "../lib/schemas/createAuctionSchema";
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 const createAuction = async (event, context) => {
   const { title } = event.body;
   const now = new Date();
-  const uuid_id = uuidv4();
+  const endDate = new Date();
+  endDate.setHours(now.getHours() + 1);
 
   const auction = {
-    id: uuid_id,
+    id: uuidv4(),
     title,
     status: "OPEN",
     createdAt: now.toISOString(),
+    endingAt: endDate.toISOString(),
     highestBid: {
       amount: 0,
     },
@@ -38,4 +42,11 @@ const createAuction = async (event, context) => {
   };
 };
 
-export const handler = commonMiddleware(createAuction);
+export const handler = commonMiddleware(createAuction).use(
+  validator({
+    inputSchema: createAuctionSchema,
+    ajvOptions: {
+      strict: false,
+    },
+  })
+);

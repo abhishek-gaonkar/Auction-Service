@@ -1,12 +1,27 @@
 import AWS from "aws-sdk";
 import commonMiddleware from "../middlewares/commonMiddleware";
 import createError from "http-errors";
+import { getAuctionById } from "./getAuction";
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 const placeBid = async (event, context) => {
   const { id } = event.pathParameters;
   const { amount } = event.body;
+
+  const auction = await getAuctionById(id);
+
+  if (auction.status !== "OPEN") {
+    throw new createError.Forbidden(
+      `Auction ${auction.id} was Closed or is currently not taking bids!`
+    );
+  }
+
+  if (amount <= auction.highestBid.amount) {
+    throw new createError.Forbidden(
+      `Your bid is less than the current highest bid: ${auction.highestBid.amount}`
+    );
+  }
 
   /**
    * UpdateExpression is processed
