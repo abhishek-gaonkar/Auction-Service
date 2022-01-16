@@ -24,6 +24,7 @@ const createAuction = async (event, context) => {
       amount: 0,
       bidderEmail: "",
     },
+    pictureUrl: "",
     sellerEmail: email,
   };
 
